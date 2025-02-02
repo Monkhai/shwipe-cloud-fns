@@ -1,0 +1,11 @@
+type User @table {
+  id: String! @col(name: "user_auth")
+  displayName: String! @col(name: "display_name")
+  photoURL: String! @col(name: "photo_url")
+}
+
+type Friend @table(name: "Friend", key: ["user1", "user2"]) {
+  user1: User!
+  user2: User!
+  status: String! @col(name: "status")
+}

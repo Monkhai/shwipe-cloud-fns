@@ -1,0 +1,12 @@
+specVersion: "v1beta"
+serviceId: "test-db"
+location: "me-west1"
+schema:
+  source: "./schema"
+  datasource:
+    postgresql:
+      database: "swhipe-postgres"
+      cloudSql:
+        instanceId: "swhipe-sql-id"
+      # schemaValidation: "COMPATIBLE"
+connectorDirs: ["./connector"]
