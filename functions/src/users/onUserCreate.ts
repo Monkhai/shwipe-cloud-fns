@@ -1,6 +1,7 @@
 import { TelegramLogger } from '@monkhai/telelogger'
 import { auth } from 'firebase-functions/v1'
 import { db_insertUser } from './db/db_insertUser'
+import { error } from 'firebase-functions/logger'
 
 export const onUserCreateFn = auth.user().onCreate(async user => {
   const logger = new TelegramLogger({
@@ -21,6 +22,7 @@ export const onUserCreateFn = auth.user().onCreate(async user => {
     logger.logSuccess(`User created: ${user.displayName}`)
   } catch (err) {
     logger.logError(`Error creating user: ${err}`)
+    error(err)
     throw err
   }
 })

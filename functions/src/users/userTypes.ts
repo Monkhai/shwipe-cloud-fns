@@ -11,4 +11,4 @@ export type User = {
   photo_url: string
 }
 
-export type SafeUser = Omit<User, 'id'>
+export type SafeUser = User
