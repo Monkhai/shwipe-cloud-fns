@@ -1,15 +1,25 @@
 import { getPool } from '../../pool'
-import { FriendRequestsStatus, FriendRequestsTable } from '../friendRequestTypes'
-import { FriendRequest } from '../friendRequestTypes'
+import { FriendRequestsStatus, FriendRequestsTable, SafeFriendRequest } from '../friendRequestTypes'
+import { UsersTable } from '../../users/userTypes'
 
-export async function db_getSentFriendRequests(userId: string): Promise<FriendRequest[]> {
+export async function db_getSentFriendRequests(userId: string): Promise<SafeFriendRequest[]> {
   const pool = await getPool()
-  const query = `SELECT * FROM ${FriendRequestsTable.NAME} WHERE ${FriendRequestsTable.SENDER_ID} = $1 AND ${FriendRequestsTable.STATUS} = '${FriendRequestsStatus.PENDING}'`
-  const result = await pool.query(query, [userId])
+  const query = `--sql
+  SELECT 
+    fr.${FriendRequestsTable.ID} as request_id,
+    fr.${FriendRequestsTable.STATUS} as status,
+    u.${UsersTable.DISPLAY_NAME} as display_name,
+    u.${UsersTable.PHOTO_URL} as photo_url
+  FROM ${FriendRequestsTable.NAME} fr
+  INNER JOIN ${UsersTable.NAME} u ON u.${UsersTable.ID} = fr.${FriendRequestsTable.RECEIVER_ID}
+  WHERE fr.${FriendRequestsTable.SENDER_ID} = $1
+    AND fr.${FriendRequestsTable.STATUS} = $2`
+
+  const result = await pool.query(query, [userId, FriendRequestsStatus.PENDING])
   return result.rows.map(row => ({
-    id: row[FriendRequestsTable.ID],
-    sender_id: row[FriendRequestsTable.SENDER_ID],
-    receiver_id: row[FriendRequestsTable.RECEIVER_ID],
-    status: row[FriendRequestsTable.STATUS],
+    request_id: row.request_id,
+    status: row.status,
+    display_name: row.display_name,
+    photo_url: row.photo_url,
   }))
 }

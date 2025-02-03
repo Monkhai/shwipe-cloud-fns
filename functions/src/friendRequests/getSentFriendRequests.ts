@@ -1,9 +1,9 @@
 import { HttpsError, onCall } from 'firebase-functions/https'
 import { logger } from '../logger'
-import { FriendRequest } from './friendRequestTypes'
 import { db_getSentFriendRequests } from './db/db_getSentFriendRequests'
+import { SafeFriendRequest } from './friendRequestTypes'
 
-export const getSentFriendRequestsFn = onCall<null, Promise<FriendRequest[]>>(async request => {
+export const getSentFriendRequestsFn = onCall<null, Promise<SafeFriendRequest[]>>(async request => {
   if (!request.auth) {
     logger.logError('User not authenticated')
     throw new HttpsError('unauthenticated', 'User not authenticated')
