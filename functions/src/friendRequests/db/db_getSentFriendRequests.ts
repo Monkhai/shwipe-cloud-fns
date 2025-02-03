@@ -1,6 +1,7 @@
 import { getPool } from '../../pool'
 import { FriendRequestResult, FriendRequestsStatus, FriendRequestsTable, SafeFriendRequest } from '../friendRequestTypes'
 import { UsersTable } from '../../users/userTypes'
+import { PublicUserIdsTable } from '../../publicUserIds/publicUserIdsTypes'
 
 export async function db_getSentFriendRequests(userId: string): Promise<SafeFriendRequest[]> {
   const pool = await getPool()
@@ -10,9 +11,10 @@ export async function db_getSentFriendRequests(userId: string): Promise<SafeFrie
     fr.${FriendRequestsTable.STATUS} as status,
     u.${UsersTable.DISPLAY_NAME} as display_name,
     u.${UsersTable.PHOTO_URL} as photo_url,
-    u.${UsersTable.ID} as user_id
+    pui.${PublicUserIdsTable.PUBLIC_ID} as user_id
   FROM ${FriendRequestsTable.NAME} fr
   INNER JOIN ${UsersTable.NAME} u ON u.${UsersTable.ID} = fr.${FriendRequestsTable.RECEIVER_ID}
+  INNER JOIN ${PublicUserIdsTable.NAME} pui ON pui.${PublicUserIdsTable.ID} = u.${UsersTable.ID}
   WHERE fr.${FriendRequestsTable.SENDER_ID} = $1
     AND fr.${FriendRequestsTable.STATUS} = $2`
 

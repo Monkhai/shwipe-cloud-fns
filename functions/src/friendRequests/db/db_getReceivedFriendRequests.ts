@@ -1,4 +1,5 @@
 import { getPool } from '../../pool'
+import { PublicUserIdsTable } from '../../publicUserIds/publicUserIdsTypes'
 import { UsersTable } from '../../users/userTypes'
 import { FriendRequestResult, FriendRequestsStatus, FriendRequestsTable, SafeFriendRequest } from '../friendRequestTypes'
 
@@ -10,9 +11,10 @@ export async function db_getReceivedFriendRequests(userId: string): Promise<Safe
     fr.${FriendRequestsTable.STATUS} as status,
     u.${UsersTable.DISPLAY_NAME} as display_name,
     u.${UsersTable.PHOTO_URL} as photo_url,
-    u.${UsersTable.ID} as user_id
+    pui.${PublicUserIdsTable.PUBLIC_ID} as user_id
   FROM ${FriendRequestsTable.NAME} fr
   INNER JOIN ${UsersTable.NAME} u ON u.${UsersTable.ID} = fr.${FriendRequestsTable.SENDER_ID}
+  INNER JOIN ${PublicUserIdsTable.NAME} pui ON pui.${PublicUserIdsTable.ID} = u.${UsersTable.ID}
   WHERE fr.${FriendRequestsTable.RECEIVER_ID} = $1
     AND fr.${FriendRequestsTable.STATUS} = $2`
 
