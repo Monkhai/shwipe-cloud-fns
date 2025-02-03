@@ -29,6 +29,6 @@ export async function db_getReceivedFriendRequests(userId: string): Promise<Safe
       user_id: row[FriendRequestResult.USER_ID],
     }))
   } finally {
-    pool.end()
+    await pool.end()
   }
 }

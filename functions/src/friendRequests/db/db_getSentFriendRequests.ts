@@ -28,6 +28,6 @@ export async function db_getSentFriendRequests(userId: string): Promise<SafeFrie
       user_id: row[FriendRequestResult.USER_ID],
     }))
   } finally {
-    pool.end()
+    await pool.end()
   }
 }

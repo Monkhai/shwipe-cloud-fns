@@ -73,7 +73,7 @@ async function handleAcepted(userId: string, friendRequestId: string) {
     throw err
   } finally {
     client.release()
-    pool.end()
+    await pool.end()
   }
 }
 
@@ -114,7 +114,7 @@ async function handleCancelled(userId: string, friendRequestId: string) {
     throw err
   } finally {
     client.release()
-    pool.end()
+    await pool.end()
   }
 }
 
@@ -153,6 +153,6 @@ async function handleReject(userId: string, friendRequestId: string) {
     throw err
   } finally {
     client.release()
-    pool.end()
+    await pool.end()
   }
 }

@@ -8,6 +8,6 @@ export async function db_insertFriendship(user1Id: string, user2Id: string): Pro
     const query = `INSERT INTO ${FriendsTable.NAME} (${FriendsTable.USER_1_ID}, ${FriendsTable.USER_2_ID}) VALUES ($1, $2)`
     await pool.query(query, [user1Id, user2Id])
   } finally {
-    pool.end()
+    await pool.end()
   }
 }

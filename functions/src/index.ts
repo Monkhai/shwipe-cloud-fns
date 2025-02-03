@@ -7,6 +7,7 @@ import { getUserFriendshipsFn } from './friends/getUserFriendships'
 import { onUserDeleteFn } from './users/db/onUserDelete'
 import { getAllUsersFn } from './users/getAllUsers'
 import { onUserCreateFn } from './users/onUserCreate'
+import { updateUserPushTokenFn } from './users/updateUserPushToken'
 
 admin.initializeApp()
 
@@ -14,6 +15,7 @@ admin.initializeApp()
 export const onUserCreate = onUserCreateFn
 export const getAllUsers = getAllUsersFn
 export const onUserDelete = onUserDeleteFn
+export const updateUserPushToken = updateUserPushTokenFn
 
 // Friend Requests
 export const sendFriendRequest = sendFriendRequestFn

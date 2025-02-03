@@ -22,6 +22,6 @@ export async function db_getAllUsers(userId: string): Promise<SafeUser[]> {
       photo_url: row[UsersTable.PHOTO_URL],
     }))
   } finally {
-    pool.end()
+    await pool.end()
   }
 }

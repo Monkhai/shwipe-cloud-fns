@@ -9,6 +9,6 @@ export async function db_insertPublicUserId(userId: string) {
     const query = `INSERT INTO ${PublicUserIdsTable.NAME} (${PublicUserIdsTable.ID}, ${PublicUserIdsTable.PUBLIC_ID}) VALUES ($1, $2)`
     await pool.query(query, [userId, publicId])
   } finally {
-    pool.end()
+    await pool.end()
   }
 }

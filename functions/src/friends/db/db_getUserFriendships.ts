@@ -28,6 +28,6 @@ export async function db_getUserFriendships(userId: string): Promise<SafeFriend[
       photo_url: row[UsersTable.PHOTO_URL],
     }))
   } finally {
-    pool.end()
+    await pool.end()
   }
 }

@@ -30,7 +30,7 @@ export enum FriendRequestResult {
   PHOTO_URL = 'photo_url',
 }
 
-export type SafeFriendRequest = Omit<User, 'id'> & {
+export type SafeFriendRequest = Omit<User, 'id' | 'expo_push_token'> & {
   request_id: string
   user_id: string
   status: FriendRequestsStatus
