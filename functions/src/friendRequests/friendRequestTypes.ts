@@ -21,7 +21,16 @@ export type FriendRequest = {
   status: FriendRequestsStatus
 }
 
+export enum FriendRequestResult {
+  REQUEST_ID = 'request_id',
+  USER_ID = 'user_id',
+  STATUS = 'status',
+  DISPLAY_NAME = 'display_name',
+  PHOTO_URL = 'photo_url',
+}
+
 export type SafeFriendRequest = Omit<User, 'id'> & {
   request_id: string
+  user_id: string
   status: FriendRequestsStatus
 }
