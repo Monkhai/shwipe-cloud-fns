@@ -1,52 +1,30 @@
-import { Connector, IpAddressTypes } from '@google-cloud/cloud-sql-connector'
+import { error } from 'firebase-functions/logger'
 import pg from 'pg'
-
+import { logger } from './logger'
 const { Pool } = pg
-
-// Create a single connector instance that can be reused
-const connector = new Connector()
-
-// Initialize the pool outside the function
-let pool: pg.Pool | null = null
+import path from 'path'
+import fs from 'fs'
+const DB_PASSWORD = 'qxk*NQG5gau9key-edu'
 
 export const getPool = async () => {
-  if (!pool) {
-    const clientOpts = await connector.getOptions({
-      instanceConnectionName: config.db.instanceConnectionName,
-      ipType: IpAddressTypes.PUBLIC,
-    })
+  const caPath = path.join(__dirname, './prod-ca-2021.crt')
+  const caFile = fs.readFileSync(caPath)
 
-    pool = new Pool({
-      ...clientOpts,
-      user: config.db.user,
-      password: config.db.password,
-      database: config.db.database,
-      max: 5, // Maximum number of clients in the pool
-      idleTimeoutMillis: 30000, // Close idle clients after 30 seconds
-    })
+  const pool = new Pool({
+    connectionString: `postgresql://postgres.xbmpgyybutdgjmvexqsr:${DB_PASSWORD}@aws-0-us-west-1.pooler.supabase.com:6543/postgres`,
+    ssl: {
+      ca: caFile,
+      rejectUnauthorized: true,
+    },
+    max: 10,
+    idleTimeoutMillis: 30000,
+    connectionTimeoutMillis: 5000,
+  })
 
-    // Handle pool errors
-    pool.on('error', err => {
-      console.error('Unexpected error on idle client', err)
-    })
-  }
+  // Handle pool errors
+  pool.on('error', err => {
+    error('Unexpected error on idle client', err)
+    logger.logError(`Unexpected error on idle client: ${err}`)
+  })
   return pool
-}
-
-// Cleanup function to be called when shutting down
-export const closePool = async () => {
-  if (pool) {
-    await pool.end()
-    pool = null
-  }
-  connector.close()
-}
-
-export const config = {
-  db: {
-    instanceConnectionName: 'shwipe-bda3b:us-central1:shwipe-db',
-    user: 'postgres',
-    password: process.env.DB_PASSWORD || 'qY=tm`;zo9+$ptML', // Better to use environment variables
-    database: 'postgres',
-  },
 }

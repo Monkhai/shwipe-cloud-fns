@@ -1,9 +1,8 @@
 import { HttpsError, onCall } from 'firebase-functions/https'
-import { FriendRequestsStatus } from './friendRequestTypes'
+import { error } from 'firebase-functions/logger'
 import { logger } from '../logger'
 import { db_updateFriendRequest } from './db/db_updateFriendRequest'
-import { db_insertFriendship } from '../friends/db/db_insertFriendship'
-import { error } from 'firebase-functions/logger'
+import { FriendRequestsStatus } from './friendRequestTypes'
 
 type UpdateFriendRequestRequest = {
   friendRequestId: string
@@ -18,10 +17,6 @@ export const updateFriendRequestFn = onCall<UpdateFriendRequestRequest, Promise<
     }
 
     await db_updateFriendRequest(request.auth.uid, request.data.friendRequestId, request.data.status)
-
-    if (request.data.status === FriendRequestsStatus.ACCEPTED) {
-      await db_insertFriendship(request.auth.uid, request.data.friendRequestId)
-    }
   } catch (err) {
     const errorMessage = `Error updating friend request ${request.data.friendRequestId}: ${err}`
     logger.logError(errorMessage)

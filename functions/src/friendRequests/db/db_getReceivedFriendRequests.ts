@@ -5,8 +5,9 @@ import { FriendRequestResult, FriendRequestsStatus, FriendRequestsTable, SafeFri
 
 export async function db_getReceivedFriendRequests(userId: string): Promise<SafeFriendRequest[]> {
   const pool = await getPool()
-  const query = `--sql
-  SELECT 
+  try {
+    const query = `--sql
+    SELECT 
     fr.${FriendRequestsTable.ID} as request_id,
     fr.${FriendRequestsTable.STATUS} as status,
     u.${UsersTable.DISPLAY_NAME} as display_name,
@@ -18,13 +19,16 @@ export async function db_getReceivedFriendRequests(userId: string): Promise<Safe
   WHERE fr.${FriendRequestsTable.RECEIVER_ID} = $1
     AND fr.${FriendRequestsTable.STATUS} = $2`
 
-  const result = await pool.query(query, [userId, FriendRequestsStatus.PENDING])
+    const result = await pool.query(query, [userId, FriendRequestsStatus.PENDING])
 
-  return result.rows.map(row => ({
-    request_id: row[FriendRequestResult.REQUEST_ID],
-    status: row[FriendRequestResult.STATUS],
-    display_name: row[FriendRequestResult.DISPLAY_NAME],
-    photo_url: row[FriendRequestResult.PHOTO_URL],
-    user_id: row[FriendRequestResult.USER_ID],
-  }))
+    return result.rows.map(row => ({
+      request_id: row[FriendRequestResult.REQUEST_ID],
+      status: row[FriendRequestResult.STATUS],
+      display_name: row[FriendRequestResult.DISPLAY_NAME],
+      photo_url: row[FriendRequestResult.PHOTO_URL],
+      user_id: row[FriendRequestResult.USER_ID],
+    }))
+  } finally {
+    pool.end()
+  }
 }

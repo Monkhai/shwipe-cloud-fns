@@ -12,6 +12,7 @@ export enum FriendRequestsStatus {
   PENDING = 'pending',
   ACCEPTED = 'accepted',
   REJECTED = 'rejected',
+  CANCELLED = 'cancelled',
 }
 
 export type FriendRequest = {

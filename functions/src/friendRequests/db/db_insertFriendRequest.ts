@@ -40,5 +40,6 @@ export async function db_insertFriendRequest(senderId: string, receiverPublicId:
     throw err
   } finally {
     client.release()
+    pool.end()
   }
 }

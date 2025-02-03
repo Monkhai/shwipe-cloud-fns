@@ -24,5 +24,6 @@ export async function db_insertUser(user: UserRecord) {
     throw err
   } finally {
     client.release()
+    pool.end()
   }
 }

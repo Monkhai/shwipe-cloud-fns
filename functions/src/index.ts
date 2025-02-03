@@ -4,7 +4,6 @@ import { getSentFriendRequestsFn } from './friendRequests/getSentFriendRequests'
 import { sendFriendRequestFn } from './friendRequests/sendFriendRequest'
 import { updateFriendRequestFn } from './friendRequests/updateFriendRequest'
 import { getUserFriendshipsFn } from './friends/getUserFriendships'
-import { closePool } from './pool'
 import { onUserDeleteFn } from './users/db/onUserDelete'
 import { getAllUsersFn } from './users/getAllUsers'
 import { onUserCreateFn } from './users/onUserCreate'
@@ -26,8 +25,3 @@ export const updateFriendRequest = updateFriendRequestFn
 
 // Friends
 export const getUserFriendships = getUserFriendshipsFn
-
-// Cleanup when the function instance is shut down
-process.on('SIGTERM', async () => {
-  await closePool()
-})
