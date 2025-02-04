@@ -8,6 +8,7 @@ import { onUserDeleteFn } from './users/db/onUserDelete'
 import { getAllUsersFn } from './users/getAllUsers'
 import { onUserCreateFn } from './users/onUserCreate'
 import { updateUserPushTokenFn } from './users/updateUserPushToken'
+import { sendSessionInvitationFn } from './sessions/sendSessionInvitation'
 
 admin.initializeApp()
 
@@ -27,3 +28,6 @@ export const updateFriendRequest = updateFriendRequestFn
 
 // Friends
 export const getUserFriendships = getUserFriendshipsFn
+
+// Sessions
+export const sendSessionInvitation = sendSessionInvitationFn

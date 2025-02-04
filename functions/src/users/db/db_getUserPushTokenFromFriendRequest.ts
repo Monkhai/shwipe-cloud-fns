@@ -8,7 +8,7 @@ export async function db_getUserPushTokenFromFriendRequest(friendRequestId: stri
     const query = `--sql
     SELECT 
       CASE 
-        WHEN fr.${FriendRequestsTable.SENDER_ID} != $2 THEN sender.${UsersTable.EXPO_PUSH_TOKEN}
+        WHEN fr.${FriendRequestsTable.SENDER_ID} = $2 THEN sender.${UsersTable.EXPO_PUSH_TOKEN}
         ELSE receiver.${UsersTable.EXPO_PUSH_TOKEN}
       END as push_token
     FROM ${FriendRequestsTable.NAME} fr
