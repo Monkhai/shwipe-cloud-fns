@@ -1,0 +1,2 @@
+- implement groups
+- create routines to clean up db for safety
