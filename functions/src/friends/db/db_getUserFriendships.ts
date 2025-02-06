@@ -12,13 +12,13 @@ export async function db_getUserFriendships(userId: string): Promise<SafeFriend[
       u.${UsersTable.PHOTO_URL},
       p.${PublicUserIdsTable.PUBLIC_ID} as public_id
     FROM ${FriendsTable.NAME} f
-    JOIN ${UsersTable.NAME} u ON (
+    JOIN ${UsersTable.TABLE_NAME} u ON (
       CASE 
         WHEN f.${FriendsTable.USER_1_ID} = $1 THEN f.${FriendsTable.USER_2_ID}
         ELSE f.${FriendsTable.USER_1_ID}
       END = u.${UsersTable.ID}
     )
-    JOIN ${PublicUserIdsTable.NAME} p ON u.${UsersTable.ID} = p.${PublicUserIdsTable.ID}
+    JOIN ${PublicUserIdsTable.TABLE_NAME} p ON u.${UsersTable.ID} = p.${PublicUserIdsTable.ID}
     WHERE f.${FriendsTable.USER_1_ID} = $1 OR f.${FriendsTable.USER_2_ID} = $1`
 
     const result = await pool.query(query, [userId])

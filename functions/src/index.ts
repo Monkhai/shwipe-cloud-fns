@@ -10,6 +10,7 @@ import { onUserCreateFn } from './users/onUserCreate'
 import { updateUserPushTokenFn } from './users/updateUserPushToken'
 import { sendSessionInvitationFn } from './sessions/sendSessionInvitation'
 import { createGroupFn } from './groups/createGroup'
+import { getUserGroupsFn } from './groups/getUserGroups'
 
 admin.initializeApp()
 
@@ -35,3 +36,4 @@ export const sendSessionInvitation = sendSessionInvitationFn
 
 // Groups
 export const createGroup = createGroupFn
+export const getUserGroups = getUserGroupsFn

@@ -1,3 +1,5 @@
+import { SafeUser } from '../users/userTypes'
+
 export enum GroupsTable {
   TABLE_NAME = 'groups',
   ID = 'id',
@@ -13,4 +15,8 @@ export enum GroupMembersTable {
 export type Group = {
   id: string
   name: string
+}
+
+export type ClientGroup = Group & {
+  members: SafeUser[]
 }

@@ -6,7 +6,7 @@ export async function db_insertPublicUserId(userId: string) {
   const pool = await getPool()
   try {
     const publicId = v4()
-    const query = `INSERT INTO ${PublicUserIdsTable.NAME} (${PublicUserIdsTable.ID}, ${PublicUserIdsTable.PUBLIC_ID}) VALUES ($1, $2)`
+    const query = `INSERT INTO ${PublicUserIdsTable.TABLE_NAME} (${PublicUserIdsTable.ID}, ${PublicUserIdsTable.PUBLIC_ID}) VALUES ($1, $2)`
     await pool.query(query, [userId, publicId])
   } finally {
     await pool.end()

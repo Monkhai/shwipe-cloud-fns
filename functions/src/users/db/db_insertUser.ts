@@ -11,11 +11,11 @@ export async function db_insertUser(user: UserRecord) {
   try {
     await client.query('BEGIN')
 
-    const userQuery = `INSERT INTO ${UsersTable.NAME} (${UsersTable.ID}, ${UsersTable.PHOTO_URL}, ${UsersTable.DISPLAY_NAME}) VALUES ($1, $2, $3)`
+    const userQuery = `INSERT INTO ${UsersTable.TABLE_NAME} (${UsersTable.ID}, ${UsersTable.PHOTO_URL}, ${UsersTable.DISPLAY_NAME}) VALUES ($1, $2, $3)`
     await client.query(userQuery, [user.uid, user.photoURL, user.displayName])
 
     const publicId = uuidv4()
-    const publicUserQuery = `INSERT INTO ${PublicUserIdsTable.NAME} (${PublicUserIdsTable.ID}, ${PublicUserIdsTable.PUBLIC_ID}) VALUES ($1, $2)`
+    const publicUserQuery = `INSERT INTO ${PublicUserIdsTable.TABLE_NAME} (${PublicUserIdsTable.ID}, ${PublicUserIdsTable.PUBLIC_ID}) VALUES ($1, $2)`
     await client.query(publicUserQuery, [user.uid, publicId])
 
     await client.query('COMMIT')

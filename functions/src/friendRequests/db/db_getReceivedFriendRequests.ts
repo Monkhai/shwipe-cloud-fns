@@ -14,8 +14,8 @@ export async function db_getReceivedFriendRequests(userId: string): Promise<Safe
     u.${UsersTable.PHOTO_URL} as photo_url,
     pui.${PublicUserIdsTable.PUBLIC_ID} as user_id
   FROM ${FriendRequestsTable.NAME} fr
-  INNER JOIN ${UsersTable.NAME} u ON u.${UsersTable.ID} = fr.${FriendRequestsTable.SENDER_ID}
-  INNER JOIN ${PublicUserIdsTable.NAME} pui ON pui.${PublicUserIdsTable.ID} = u.${UsersTable.ID}
+  INNER JOIN ${UsersTable.TABLE_NAME} u ON u.${UsersTable.ID} = fr.${FriendRequestsTable.SENDER_ID}
+  INNER JOIN ${PublicUserIdsTable.TABLE_NAME} pui ON pui.${PublicUserIdsTable.ID} = u.${UsersTable.ID}
   WHERE fr.${FriendRequestsTable.RECEIVER_ID} = $1
     AND fr.${FriendRequestsTable.STATUS} = $2`
 

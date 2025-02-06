@@ -11,7 +11,7 @@ export async function db_insertFriendRequest(senderId: string, receiverPublicId:
   client.query('BEGIN')
 
   try {
-    const userQuery = `SELECT ${PublicUserIdsTable.ID} FROM ${PublicUserIdsTable.NAME} WHERE ${PublicUserIdsTable.PUBLIC_ID} = $1`
+    const userQuery = `SELECT ${PublicUserIdsTable.ID} FROM ${PublicUserIdsTable.TABLE_NAME} WHERE ${PublicUserIdsTable.PUBLIC_ID} = $1`
     const userResult = await client.query(userQuery, [receiverPublicId])
     if (userResult.rows.length === 0) {
       logger.logError(`User with public id ${receiverPublicId} not found`)

@@ -1,5 +1,5 @@
 export enum UsersTable {
-  NAME = 'users',
+  TABLE_NAME = 'users',
   ID = 'id',
   DISPLAY_NAME = 'display_name',
   PHOTO_URL = 'photo_url',

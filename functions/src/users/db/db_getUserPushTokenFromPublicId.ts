@@ -8,8 +8,8 @@ export async function db_getUserPushTokenFromPublicId(publicId: string): Promise
     const query = `--sql
     SELECT
       u.${UsersTable.EXPO_PUSH_TOKEN}
-    FROM ${UsersTable.NAME} u
-    INNER JOIN ${PublicUserIdsTable.NAME} pui ON pui.${PublicUserIdsTable.ID} = u.${UsersTable.ID}
+    FROM ${UsersTable.TABLE_NAME} u
+    INNER JOIN ${PublicUserIdsTable.TABLE_NAME} pui ON pui.${PublicUserIdsTable.ID} = u.${UsersTable.ID}
     WHERE pui.${PublicUserIdsTable.PUBLIC_ID} = $1`
 
     const result = await pool.query(query, [publicId])

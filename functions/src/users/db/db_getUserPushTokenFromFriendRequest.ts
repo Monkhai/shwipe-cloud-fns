@@ -12,9 +12,9 @@ export async function db_getUserPushTokenFromFriendRequest(friendRequestId: stri
         ELSE receiver.${UsersTable.EXPO_PUSH_TOKEN}
       END as push_token
     FROM ${FriendRequestsTable.NAME} fr
-    INNER JOIN ${UsersTable.NAME} sender 
+    INNER JOIN ${UsersTable.TABLE_NAME} sender 
       ON sender.${UsersTable.ID} = fr.${FriendRequestsTable.SENDER_ID}
-    INNER JOIN ${UsersTable.NAME} receiver 
+    INNER JOIN ${UsersTable.TABLE_NAME} receiver 
       ON receiver.${UsersTable.ID} = fr.${FriendRequestsTable.RECEIVER_ID}
     WHERE fr.${FriendRequestsTable.ID} = $1
       AND (sender.${UsersTable.ID} = $2 OR receiver.${UsersTable.ID} = $2)

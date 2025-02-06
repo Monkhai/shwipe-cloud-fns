@@ -10,8 +10,8 @@ export async function db_getAllUsers(userId: string): Promise<SafeUser[]> {
         u.${UsersTable.DISPLAY_NAME}, 
         u.${UsersTable.PHOTO_URL},
         p.${PublicUserIdsTable.PUBLIC_ID} as id
-      FROM ${UsersTable.NAME} u
-      JOIN ${PublicUserIdsTable.NAME} p ON u.${UsersTable.ID} = p.${PublicUserIdsTable.ID}
+      FROM ${UsersTable.TABLE_NAME} u
+      JOIN ${PublicUserIdsTable.TABLE_NAME} p ON u.${UsersTable.ID} = p.${PublicUserIdsTable.ID}
       WHERE u.${UsersTable.ID} != $1
     `
     const result = await pool.query(query, [userId])
