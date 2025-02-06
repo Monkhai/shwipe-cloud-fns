@@ -7,7 +7,7 @@ type CreateGroupRequest = {
   groupName: string
 }
 
-export const createGroupFn = onCall<CreateGroupRequest, void>(async request => {
+export const insertGroupFn = onCall<CreateGroupRequest, void>(async request => {
   if (!request.auth) {
     throw new HttpsError('unauthenticated', 'User must be authenticated')
   }

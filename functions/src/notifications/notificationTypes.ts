@@ -3,4 +3,6 @@ export enum NotificationType {
   FRIEND_REQUEST_UPDATED = 'friend_request_updated',
 
   SESSION_INVITATION = 'session_invitation',
+
+  GROUP_INVITATION = 'group_invitation',
 }

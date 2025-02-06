@@ -1,7 +1,8 @@
+import { GroupMembersTable } from '../../groupMembers/groupMembersTypes'
 import { getPool } from '../../pool'
 import { PublicUserIdsTable } from '../../publicUserIds/publicUserIdsTypes'
 import { UsersTable } from '../../users/userTypes'
-import { ClientGroup, GroupMembersTable, GroupsTable } from '../groupTypes'
+import { ClientGroup, GroupsTable } from '../groupTypes'
 
 export async function db_getUserGroups(userId: string): Promise<Array<ClientGroup>> {
   const pool = await getPool()

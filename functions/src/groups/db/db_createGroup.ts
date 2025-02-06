@@ -1,6 +1,7 @@
 import { v4 } from 'uuid'
 import { getPool } from '../../pool'
-import { GroupsTable, GroupMembersTable } from '../groupTypes'
+import { GroupsTable } from '../groupTypes'
+import { GroupMembersTable } from '../../groupMembers/groupMembersTypes'
 
 export async function db_createGroup(userId: string, groupName: string) {
   const pool = await getPool()

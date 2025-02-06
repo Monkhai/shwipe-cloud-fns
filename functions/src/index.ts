@@ -9,8 +9,10 @@ import { getAllUsersFn } from './users/getAllUsers'
 import { onUserCreateFn } from './users/onUserCreate'
 import { updateUserPushTokenFn } from './users/updateUserPushToken'
 import { sendSessionInvitationFn } from './sessions/sendSessionInvitation'
-import { createGroupFn } from './groups/createGroup'
+import { insertGroupFn } from './groups/insertGroup'
 import { getUserGroupsFn } from './groups/getUserGroups'
+import { insertGroupMemberFn } from './groupMembers/insertGroupMember'
+import { sendGroupInvitationFn } from './groups/sendGroupInvitation'
 
 admin.initializeApp()
 
@@ -35,5 +37,9 @@ export const getUserFriendships = getUserFriendshipsFn
 export const sendSessionInvitation = sendSessionInvitationFn
 
 // Groups
-export const createGroup = createGroupFn
+export const insertGroup = insertGroupFn
 export const getUserGroups = getUserGroupsFn
+export const sendGroupInvitation = sendGroupInvitationFn
+
+// Group Members
+export const insertGroupMember = insertGroupMemberFn
