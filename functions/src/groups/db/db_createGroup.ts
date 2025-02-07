@@ -15,6 +15,7 @@ export async function db_createGroup(userId: string, groupName: string) {
     await pool.query(groupMembersTableQuery, [groupId, userId])
     client.query('COMMIT')
   } finally {
+    client.release()
     await pool.end()
   }
 }

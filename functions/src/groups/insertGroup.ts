@@ -3,11 +3,11 @@ import { db_createGroup } from './db/db_createGroup'
 import { logger } from '../logger'
 import { error } from 'firebase-functions/logger'
 
-type CreateGroupRequest = {
+type InsertGroupRequest = {
   groupName: string
 }
 
-export const insertGroupFn = onCall<CreateGroupRequest, void>(async request => {
+export const insertGroupFn = onCall<InsertGroupRequest, void>(async request => {
   if (!request.auth) {
     throw new HttpsError('unauthenticated', 'User must be authenticated')
   }

@@ -58,7 +58,7 @@ async function handleAcepted(userId: string, friendRequestId: string) {
     const senderId = verifyResult.rows[0][FriendRequestsTable.SENDER_ID]
     const updateQuery = `--sql
     UPDATE ${FriendRequestsTable.NAME}
-      SET ${FriendRequestsTable.STATUS} = $1::friend_request_status
+      SET ${FriendRequestsTable.STATUS} = $1::request_status
       WHERE ${FriendRequestsTable.ID} = $2`
 
     await client.query(updateQuery, [FriendRequestsStatus.ACCEPTED, friendRequestId])

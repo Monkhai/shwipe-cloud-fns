@@ -7,6 +7,7 @@ import { db_getUserGroups } from './db/db_getUserGroups'
 type GetUserGroupsResponse = {
   groups: Array<ClientGroup>
 }
+
 export const getUserGroupsFn = onCall<null, Promise<GetUserGroupsResponse>>(async request => {
   try {
     if (!request.auth) {

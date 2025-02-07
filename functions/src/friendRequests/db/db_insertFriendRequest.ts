@@ -31,7 +31,7 @@ export async function db_insertFriendRequest(senderId: string, receiverPublicId:
     const query = `--sql
     INSERT INTO ${FriendRequestsTable.NAME}
       (${FriendRequestsTable.SENDER_ID}, ${FriendRequestsTable.RECEIVER_ID}, ${FriendRequestsTable.STATUS})
-      VALUES ($1, $2, $3::friend_request_status)`
+      VALUES ($1, $2, $3::request_status)`
     await client.query(query, [senderId, receiverId, FriendRequestsStatus.PENDING])
 
     await client.query('COMMIT')

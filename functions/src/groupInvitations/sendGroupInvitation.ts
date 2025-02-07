@@ -5,10 +5,11 @@ import { db_getUserPushTokenFromPublicId } from '../users/db/db_getUserPushToken
 import { NotificationType } from '../notifications/notificationTypes'
 import { logger } from '../logger'
 import { error } from 'firebase-functions/logger'
+import { db_insertGroupInvitation } from './db/db_InsertGroupInvitation'
 
 type SendGroupInvitationRequest = {
   groupId: string
-  publicId: string
+  userId: string
 }
 
 export const sendGroupInvitationFn = onCall<SendGroupInvitationRequest, void>(async request => {
@@ -18,7 +19,10 @@ export const sendGroupInvitationFn = onCall<SendGroupInvitationRequest, void>(as
     }
 
     const groupId = request.data.groupId
-    const publicId = request.data.publicId
+    const publicId = request.data.userId
+
+    await db_insertGroupInvitation(groupId, request.auth.uid, publicId)
+
     const pushToken = await db_getUserPushTokenFromPublicId(publicId)
     if (!pushToken) {
       const userId = await db_getUserIdFromPublicId(publicId)

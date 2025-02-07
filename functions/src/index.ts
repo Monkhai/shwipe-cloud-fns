@@ -12,7 +12,8 @@ import { sendSessionInvitationFn } from './sessions/sendSessionInvitation'
 import { insertGroupFn } from './groups/insertGroup'
 import { getUserGroupsFn } from './groups/getUserGroups'
 import { insertGroupMemberFn } from './groupMembers/insertGroupMember'
-import { sendGroupInvitationFn } from './groups/sendGroupInvitation'
+import { sendGroupInvitationFn } from './groupInvitations/sendGroupInvitation'
+import { getGroupInvitationsFn } from './groupInvitations/getGroupInvitations'
 
 admin.initializeApp()
 
@@ -37,9 +38,12 @@ export const getUserFriendships = getUserFriendshipsFn
 export const sendSessionInvitation = sendSessionInvitationFn
 
 // Groups
-export const insertGroup = insertGroupFn
 export const getUserGroups = getUserGroupsFn
+export const insertGroup = insertGroupFn
 export const sendGroupInvitation = sendGroupInvitationFn
 
 // Group Members
 export const insertGroupMember = insertGroupMemberFn
+
+// Group Invitations
+export const getGroupInvitations = getGroupInvitationsFn
