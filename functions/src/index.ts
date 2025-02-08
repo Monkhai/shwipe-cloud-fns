@@ -14,6 +14,8 @@ import { getUserGroupsFn } from './groups/getUserGroups'
 import { insertGroupMemberFn } from './groupMembers/insertGroupMember'
 import { sendGroupInvitationFn } from './groupInvitations/sendGroupInvitation'
 import { getGroupInvitationsFn } from './groupInvitations/getGroupInvitations'
+import { leaveGroupFn } from './groups/leaveGroup'
+import { cancelGroupInvitationFn } from './groupInvitations/cancelGRoupInvitation'
 
 admin.initializeApp()
 
@@ -41,6 +43,8 @@ export const sendSessionInvitation = sendSessionInvitationFn
 export const getUserGroups = getUserGroupsFn
 export const insertGroup = insertGroupFn
 export const sendGroupInvitation = sendGroupInvitationFn
+export const cancelGroupInvitation = cancelGroupInvitationFn
+export const leaveGroup = leaveGroupFn
 
 // Group Members
 export const insertGroupMember = insertGroupMemberFn

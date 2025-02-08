@@ -8,6 +8,7 @@ export enum GroupInvitationsTable {
   SENDER_ID = 'sender_id',
   RECEIVER_ID = 'receiver_id',
   STATUS = 'status',
+  PUBLIC_USER_ID = 'PUBLIC_USER_ID',
 }
 
 export enum GroupInvitationStatus {

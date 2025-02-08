@@ -13,4 +13,5 @@ export type Group = {
 
 export type ClientGroup = Group & {
   members: SafeUser[]
+  pendingMembers: SafeUser[]
 }

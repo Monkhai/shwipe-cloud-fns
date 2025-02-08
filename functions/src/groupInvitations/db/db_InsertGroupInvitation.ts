@@ -11,7 +11,7 @@ export async function db_insertGroupInvitation(groupId: string, senderId: string
       SELECT pui.${PublicUserIdsTable.ID} as receiver_id
       FROM ${PublicUserIdsTable.TABLE_NAME} pui
       WHERE pui.${PublicUserIdsTable.PUBLIC_ID} = $3
-    ),
+    )
     INSERT INTO ${GroupInvitationsTable.TABLE_NAME}
       (${GroupInvitationsTable.GROUP_ID}, ${GroupInvitationsTable.SENDER_ID}, ${GroupInvitationsTable.RECEIVER_ID})
       VALUES ($1, $2, (SELECT receiver_id FROM receiver))

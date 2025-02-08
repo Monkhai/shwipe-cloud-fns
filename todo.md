@@ -1,2 +1,5 @@
 - implement groups
+  - update group name
+  - delete group ?? (maybe not)
+  - leave group
 - create routines to clean up db for safety
