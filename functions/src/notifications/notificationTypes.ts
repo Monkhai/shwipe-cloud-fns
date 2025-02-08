@@ -5,4 +5,5 @@ export enum NotificationType {
   SESSION_INVITATION = 'session_invitation',
 
   GROUP_INVITATION = 'group_invitation',
+  GROUP_INVITATION_UPDATED = 'group_invitation_updated',
 }

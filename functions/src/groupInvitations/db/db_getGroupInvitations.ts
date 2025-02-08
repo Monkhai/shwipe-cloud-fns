@@ -1,5 +1,11 @@
 import { getPool } from '../../pool'
-import { GroupInvitationMemberResult, GroupInvitationResult, GroupInvitationsTable, SafeGroupInvitation } from '../groupInvitationTypes'
+import {
+  GroupInvitationMemberResult,
+  GroupInvitationResult,
+  GroupInvitationsTable,
+  GroupInvitationStatus,
+  SafeGroupInvitation,
+} from '../groupInvitationTypes'
 import { GroupsTable } from '../../groups/groupTypes'
 import { UsersTable } from '../../users/userTypes'
 import { GroupMembersTable } from '../../groupMembers/groupMembersTypes'
@@ -37,9 +43,10 @@ export async function db_getGroupInvitations(userId: string): Promise<Array<Safe
     JOIN ${GroupsTable.TABLE_NAME} g ON gi.${GroupInvitationsTable.GROUP_ID} = g.${GroupsTable.ID}
     JOIN ${UsersTable.TABLE_NAME} u ON gi.${GroupInvitationsTable.SENDER_ID} = u.${UsersTable.ID}
     LEFT JOIN group_members gm ON g.${GroupsTable.ID} = gm.${GroupMembersTable.GROUP_ID}
-    WHERE gi.${GroupInvitationsTable.RECEIVER_ID} = $1`
+    WHERE gi.${GroupInvitationsTable.RECEIVER_ID} = $1
+      AND gi.${GroupInvitationsTable.STATUS} = $2::request_status`
 
-    const result = await pool.query(query, [userId])
+    const result = await pool.query(query, [userId, GroupInvitationStatus.PENDING])
     return result.rows.map(row => ({
       id: row[GroupsTable.ID],
       invitation_id: row[GroupInvitationResult.INVITATION_ID],

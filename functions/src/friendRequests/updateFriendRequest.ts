@@ -20,6 +20,7 @@ export const updateFriendRequestFn = onCall<UpdateFriendRequestRequest, Promise<
     }
 
     const pushToken = await db_getUserPushTokenFromFriendRequest(request.data.friendRequestId, request.auth.uid)
+
     if (!pushToken) {
       throw new HttpsError('permission-denied', 'updateFriendRequestFn: User has no push token')
     }
