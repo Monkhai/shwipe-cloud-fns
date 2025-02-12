@@ -17,6 +17,7 @@ import { getGroupInvitationsFn } from './groupInvitations/getGroupInvitations'
 import { leaveGroupFn } from './groups/leaveGroup'
 import { cancelGroupInvitationFn } from './groupInvitations/cancelGRoupInvitation'
 import { updateGroupInvitationFn } from './groupInvitations/updateGroupInvitation'
+import { deleteAccountFn } from './users/deleteAccount'
 
 admin.initializeApp()
 
@@ -25,6 +26,7 @@ export const onUserCreate = onUserCreateFn
 export const getAllUsers = getAllUsersFn
 export const onUserDelete = onUserDeleteFn
 export const updateUserPushToken = updateUserPushTokenFn
+export const deleteAccount = deleteAccountFn
 
 // Friend Requests
 export const sendFriendRequest = sendFriendRequestFn

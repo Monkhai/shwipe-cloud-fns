@@ -1,5 +1,2 @@
-- implement groups
-  - update group name
-  - delete group ?? (maybe not)
-  - leave group
+- change all logs to also name the function
 - create routines to clean up db for safety
