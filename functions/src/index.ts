@@ -18,6 +18,8 @@ import { leaveGroupFn } from './groups/leaveGroup'
 import { cancelGroupInvitationFn } from './groupInvitations/cancelGRoupInvitation'
 import { updateGroupInvitationFn } from './groupInvitations/updateGroupInvitation'
 import { deleteAccountFn } from './users/deleteAccount'
+import { getPopularRestaurantsFn } from './restaurants/getPopularRestaurants'
+import { getRestaurantDetailsFn } from './restaurants/getRestaurantDetails'
 
 admin.initializeApp()
 
@@ -55,3 +57,7 @@ export const insertGroupMember = insertGroupMemberFn
 export const getGroupInvitations = getGroupInvitationsFn
 export const cancelGroupInvitation = cancelGroupInvitationFn
 export const updateGroupInvitation = updateGroupInvitationFn
+
+// Restaurants
+export const getPopularRestaurants = getPopularRestaurantsFn
+export const getRestaurantDetails = getRestaurantDetailsFn
