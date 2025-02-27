@@ -29,6 +29,7 @@ export async function db_getUserGroups(userId: string): Promise<Array<ClientGrou
               JOIN ${UsersTable.TABLE_NAME} member_user ON all_members.${GroupMembersTable.USER_ID} = member_user.${UsersTable.ID}
               JOIN ${PublicUserIdsTable.TABLE_NAME} member_public ON member_user.${UsersTable.ID} = member_public.${PublicUserIdsTable.ID}
               WHERE all_members.${GroupMembersTable.GROUP_ID} = g.${GroupsTable.ID}
+              AND all_members.${GroupMembersTable.USER_ID} != $1
             ) mu
             JOIN ${PublicUserIdsTable.TABLE_NAME} mp ON mu.${UsersTable.ID} = mp.${PublicUserIdsTable.ID}
           ),

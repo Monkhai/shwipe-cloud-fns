@@ -56,13 +56,13 @@ You can execute the `AdminGetUser` query using the following action shortcut fun
 ```javascript
 adminGetUser(vars: AdminGetUserVariables): QueryPromise<AdminGetUserData, AdminGetUserVariables>;
 
-adminGetUserRef(vars: AdminGetUserVariables): QueryRef<AdminGetUserData, AdminGetUserVariables>;
+adminGetUserRef(vars: AdminGetUserVariables): (QueryRef<AdminGetUserData, AdminGetUserVariables> & { __angular?: false });
 ```
 You can also pass in a `DataConnect` instance to the action shortcut function or `QueryRef` function.
 ```javascript
 adminGetUser(dc: DataConnect, vars: AdminGetUserVariables): QueryPromise<AdminGetUserData, AdminGetUserVariables>;
 
-adminGetUserRef(dc: DataConnect, vars: AdminGetUserVariables): QueryRef<AdminGetUserData, AdminGetUserVariables>;
+adminGetUserRef(dc: DataConnect, vars: AdminGetUserVariables): (QueryRef<AdminGetUserData, AdminGetUserVariables> & { __angular?: false });
 ```
 
 ### Variables
@@ -166,13 +166,13 @@ You can execute the `AdminCreateUser` mutation using the following action shortc
 ```javascript
 adminCreateUser(vars: AdminCreateUserVariables): MutationPromise<AdminCreateUserData, AdminCreateUserVariables>;
 
-adminCreateUserRef(vars: AdminCreateUserVariables): MutationRef<AdminCreateUserData, AdminCreateUserVariables>;
+adminCreateUserRef(vars: AdminCreateUserVariables): (MutationRef<AdminCreateUserData, AdminCreateUserVariables> & { __angular?: false });
 ```
 You can also pass in a `DataConnect` instance to the action shortcut function or `MutationRef` function.
 ```javascript
 adminCreateUser(dc: DataConnect, vars: AdminCreateUserVariables): MutationPromise<AdminCreateUserData, AdminCreateUserVariables>;
 
-adminCreateUserRef(dc: DataConnect, vars: AdminCreateUserVariables): MutationRef<AdminCreateUserData, AdminCreateUserVariables>;
+adminCreateUserRef(dc: DataConnect, vars: AdminCreateUserVariables): (MutationRef<AdminCreateUserData, AdminCreateUserVariables> & { __angular?: false });
 ```
 
 ### Variables

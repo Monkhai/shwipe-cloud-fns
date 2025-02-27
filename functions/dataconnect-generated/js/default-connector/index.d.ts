@@ -1,12 +1,10 @@
 import { ConnectorConfig, DataConnect, QueryRef, QueryPromise, MutationRef, MutationPromise } from 'firebase/data-connect';
+
 export const connectorConfig: ConnectorConfig;
 
 export type TimestampString = string;
-
 export type UUIDString = string;
-
 export type Int64String = string;
-
 export type DateString = string;
 
 
@@ -45,18 +43,18 @@ export interface User_Key {
 
 
 /* Allow users to create refs without passing in DataConnect */
-export function adminCreateUserRef(vars: AdminCreateUserVariables): MutationRef<AdminCreateUserData, AdminCreateUserVariables>;
+export function adminCreateUserRef(vars: AdminCreateUserVariables): (MutationRef<AdminCreateUserData, AdminCreateUserVariables> & { __angular?: false });
 /* Allow users to pass in custom DataConnect instances */
-export function adminCreateUserRef(dc: DataConnect, vars: AdminCreateUserVariables): MutationRef<AdminCreateUserData, AdminCreateUserVariables>;
+export function adminCreateUserRef(dc: DataConnect, vars: AdminCreateUserVariables): (MutationRef<AdminCreateUserData, AdminCreateUserVariables> & { __angular?: false });
 
 export function adminCreateUser(vars: AdminCreateUserVariables): MutationPromise<AdminCreateUserData, AdminCreateUserVariables>;
 export function adminCreateUser(dc: DataConnect, vars: AdminCreateUserVariables): MutationPromise<AdminCreateUserData, AdminCreateUserVariables>;
 
 
 /* Allow users to create refs without passing in DataConnect */
-export function adminGetUserRef(vars: AdminGetUserVariables): QueryRef<AdminGetUserData, AdminGetUserVariables>;
+export function adminGetUserRef(vars: AdminGetUserVariables): (QueryRef<AdminGetUserData, AdminGetUserVariables> & { __angular?: false });
 /* Allow users to pass in custom DataConnect instances */
-export function adminGetUserRef(dc: DataConnect, vars: AdminGetUserVariables): QueryRef<AdminGetUserData, AdminGetUserVariables>;
+export function adminGetUserRef(dc: DataConnect, vars: AdminGetUserVariables): (QueryRef<AdminGetUserData, AdminGetUserVariables> & { __angular?: false });
 
 export function adminGetUser(vars: AdminGetUserVariables): QueryPromise<AdminGetUserData, AdminGetUserVariables>;
 export function adminGetUser(dc: DataConnect, vars: AdminGetUserVariables): QueryPromise<AdminGetUserData, AdminGetUserVariables>;
