@@ -20,12 +20,13 @@ import { updateGroupInvitationFn } from './groupInvitations/updateGroupInvitatio
 import { deleteAccountFn } from './users/deleteAccount'
 import { getPopularRestaurantsFn } from './restaurants/getPopularRestaurants'
 import { getRestaurantDetailsFn } from './restaurants/getRestaurantDetails'
+import { getPublicIdFn } from './users/getPublicId'
 
 admin.initializeApp()
-
 // Users
 export const onUserCreate = onUserCreateFn
 export const getAllUsers = getAllUsersFn
+export const getPublicId = getPublicIdFn
 export const onUserDelete = onUserDeleteFn
 export const updateUserPushToken = updateUserPushTokenFn
 export const deleteAccount = deleteAccountFn
