@@ -4,7 +4,7 @@ import { PublicUserIdsTable } from '../../publicUserIds/publicUserIdsTypes'
 import { SafeUser, UsersTable } from '../userTypes'
 import { FriendsTable } from '../../friends/friendsTypes'
 
-export async function db_getSafeUserFromPublicId(publicId: string, currentUserId?: string): Promise<SafeUser & { isFriend: boolean }> {
+export async function db_getSafeUserFromPublicId(publicId: string, currentUserId: string): Promise<SafeUser & { isFriend: boolean }> {
   const pool = await getPool()
   try {
     const query = `--sql
@@ -12,21 +12,19 @@ export async function db_getSafeUserFromPublicId(publicId: string, currentUserId
       pu.${PublicUserIdsTable.PUBLIC_ID},
       u.${UsersTable.DISPLAY_NAME},
       u.${UsersTable.PHOTO_URL},
-      ${
-        currentUserId
-          ? `EXISTS (
-        SELECT 1
-        FROM ${FriendsTable.NAME} f
-        WHERE f.${FriendsTable.USER_1_ID} = u.${UsersTable.ID}
-        AND f.${FriendsTable.USER_2_ID} = $2
-      )`
-          : 'false'
-      } as is_friend
+      EXISTS (
+          SELECT 1
+          FROM ${FriendsTable.NAME} f
+          JOIN ${PublicUserIdsTable.TABLE_NAME} current_pu ON current_pu.${PublicUserIdsTable.PUBLIC_ID} = $2
+          WHERE ((f.${FriendsTable.USER_1_ID} = u.${UsersTable.ID} AND f.${FriendsTable.USER_2_ID} = current_pu.${PublicUserIdsTable.ID})
+          OR (f.${FriendsTable.USER_1_ID} = current_pu.${PublicUserIdsTable.ID} AND f.${FriendsTable.USER_2_ID} = u.${UsersTable.ID}))
+      )
+       as is_friend
     FROM ${PublicUserIdsTable.TABLE_NAME} pu
     INNER JOIN ${UsersTable.TABLE_NAME} u ON pu.${PublicUserIdsTable.ID} = u.${UsersTable.ID}
     WHERE pu.${PublicUserIdsTable.PUBLIC_ID} = $1
     `
-    const result = await pool.query(query, currentUserId ? [publicId, currentUserId] : [publicId])
+    const result = await pool.query(query, [publicId, currentUserId])
     const user = result.rows[0]
     if (!user) {
       throw new HttpsError('not-found', 'User not found')
