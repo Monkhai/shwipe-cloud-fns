@@ -15,11 +15,9 @@ export async function db_getSafeUserFromPublicId(publicId: string, currentUserId
       EXISTS (
           SELECT 1
           FROM ${FriendsTable.NAME} f
-          JOIN ${PublicUserIdsTable.TABLE_NAME} current_pu ON current_pu.${PublicUserIdsTable.PUBLIC_ID} = $2
-          WHERE ((f.${FriendsTable.USER_1_ID} = u.${UsersTable.ID} AND f.${FriendsTable.USER_2_ID} = current_pu.${PublicUserIdsTable.ID})
-          OR (f.${FriendsTable.USER_1_ID} = current_pu.${PublicUserIdsTable.ID} AND f.${FriendsTable.USER_2_ID} = u.${UsersTable.ID}))
-      )
-       as is_friend
+          WHERE ((f.${FriendsTable.USER_1_ID} = $2 AND f.${FriendsTable.USER_2_ID} = u.${UsersTable.ID})
+          OR (f.${FriendsTable.USER_1_ID} = u.${UsersTable.ID} AND f.${FriendsTable.USER_2_ID} = $2))
+      ) as is_friend
     FROM ${PublicUserIdsTable.TABLE_NAME} pu
     INNER JOIN ${UsersTable.TABLE_NAME} u ON pu.${PublicUserIdsTable.ID} = u.${UsersTable.ID}
     WHERE pu.${PublicUserIdsTable.PUBLIC_ID} = $1
