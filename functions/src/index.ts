@@ -22,6 +22,7 @@ import { getPopularRestaurantsFn } from './restaurants/getPopularRestaurants'
 import { getRestaurantDetailsFn } from './restaurants/getRestaurantDetails'
 import { getPublicIdFn } from './users/getPublicId'
 import { getUserFn } from './users/getUser'
+import { removeFriendshipFn } from './friends/removeFriendship'
 
 admin.initializeApp()
 // Users
@@ -38,11 +39,10 @@ export const sendFriendRequest = sendFriendRequestFn
 export const getSentFriendRequests = getSentFriendRequestsFn
 export const getReceivedFriendRequests = getReceivedFriendRequestsFn
 
-// Friendships
-export const updateFriendRequest = updateFriendRequestFn
-
 // Friends
 export const getUserFriendships = getUserFriendshipsFn
+export const updateFriendRequest = updateFriendRequestFn
+export const removeFriendship = removeFriendshipFn
 
 // Sessions
 export const sendSessionInvitation = sendSessionInvitationFn
